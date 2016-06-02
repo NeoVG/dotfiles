@@ -1,0 +1,8 @@
+if [ ! -h ~/.bashrc ]; then
+	ln -s ~/dotfiles/bashrc ~/.bashrc
+fi
+
+if [ ! -h ~/.bash_profile ]; then
+	ln -s ~/dotfiles/bash_profile ~/.bash_profile
+fi
+

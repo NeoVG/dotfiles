@@ -1,0 +1,25 @@
+function parse_git_branch {
+        ref=$(git symbolic-ref HEAD 2> /dev/null) || return
+	url=$(git config --get remote.origin.url 2> /dev/null) || return
+        echo " ("$url ${ref#refs/heads/}")"
+}
+
+RED="\e[0;31m"
+GREEN="\e[0;32m"
+VIOLET="\e[0;35m"
+BLUE="\e[0;34m"
+DEFAULT="\e[m"
+
+PS1="\n"
+
+#PS1="$PS1\`if [ \$? = 0 ]; then echo '$GREEN^_^$DEFAULT'; else echo '$RED>_<$DEFAULT'; fi\`"   # return of last command (^_^ = success | >_< = error)
+
+PS1="$PS1\A ["
+PS1="$PS1 \`if [ \$(id -u) = 0 ]; then echo '$RED'; elif [ \$(whoami) = www ]; then echo '$GREEN'; else echo '$BLUE'; fi\`\u$DEFAULT"
+PS1="$PS1 @"
+PS1="$PS1 $BLUE\h$DEFAULT"			# hostname
+PS1="$PS1 $BLUE\w$DEFAULT"			# current working directory
+PS1="$PS1$VIOLET\$(parse_git_branch)$DEFAULT"	# git remote url and branch
+PS1="$PS1 ]\n"
+PS1="$PS1\$ "
+

@@ -1,0 +1,13 @@
+alias ..='cd ..'
+alias la='ls -lah'
+alias du1='du -xHhd 1'
+alias df='df -h'
+alias su='sudo su -'
+alias tmux='tmux -2 -CC'
+
+if [ "$(uname)" == "FreeBSD" ] || [ "$(uname)" == "Darwin" ]; then
+	alias ls='ls -G'
+elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+	alias ls='ls --color'
+fi
+

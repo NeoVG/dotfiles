@@ -1,25 +1,117 @@
-function parse_git_branch {
-        ref=$(git symbolic-ref HEAD 2> /dev/null) || return
-	url=$(git config --get remote.origin.url 2> /dev/null) || return
-        echo " ("$url ${ref#refs/heads/}")"
+source ~/dotfiles/helper/prompt-colors.sh
+source ~/dotfiles/helper/prompt-git.sh
+
+BG_CLOCK="40;80;120"
+FG_CLOCK="120;160;200"
+
+FG_ALERT="255;92;92"
+
+BG_USERHOST="60;100;140"
+FG_USERHOST="196;196;196"
+FG_ROOT="255;128;128"
+FG_AT="128;128;128"
+FG_HOST="196;196;196"
+
+BG_PATH="80;120;160"
+FG_PATH="255;255;255"
+
+BG_GIT_CLEAN="40;120;80"
+BG_GIT_DIRTY="120;60;60"
+FG_GIT="255;255;255"
+
+SYM_ALERT="×"
+SYM_ALERT="\xf0\x9f\x92\xa9 "
+
+SYM_BRANCH=""
+SYM_DETACHED="➦"
+SYM_DIRTY="±"
+
+
+function prompt_clock {
+    printf " $(date +"%H:%M")"
 }
 
-RED="\e[0;31m"
-GREEN="\e[0;32m"
-VIOLET="\e[0;35m"
-BLUE="\e[0;34m"
-DEFAULT="\e[m"
+function prompt_status {
+    if [ $RETVAL != 0 ]; then
+        local oldfg=${CURRENT_FG}
+        set_fg ${FG_ALERT}
+        printf " ${SYM_ALERT}"
+        set_fg ${oldfg}
+    fi
+}
 
-PS1="\n"
+function prompt_user {
+    if [ $EUID == 0 ]; then
+        local oldfg=${CURRENT_FG}
+        set_fg ${FG_ROOT}
+        printf "$(whoami)"
+        set_fg ${oldfg}
+    else
+        printf "$(whoami)"
+    fi
+}
 
-#PS1="$PS1\`if [ \$? = 0 ]; then echo '$GREEN^_^$DEFAULT'; else echo '$RED>_<$DEFAULT'; fi\`"   # return of last command (^_^ = success | >_< = error)
+function prompt_host {
+    if [ $IS_SSH == 1 ]; then
+        local oldfg=${CURRENT_FG}
+        set_fg ${FG_AT}
+        printf " @ "
+        set_fg ${FG_HOST}
+        printf "$(hostname)"
+        set_fg ${oldfg}
+    fi
+}
 
-PS1="$PS1\A ["
-PS1="$PS1 \`if [ \$(id -u) = 0 ]; then echo '$RED'; elif [ \$(whoami) = www ]; then echo '$GREEN'; else echo '$BLUE'; fi\`\u$DEFAULT"
-PS1="$PS1 @"
-PS1="$PS1 $BLUE\h$DEFAULT"			# hostname
-PS1="$PS1 $BLUE\w$DEFAULT"			# current working directory
-PS1="$PS1$VIOLET\$(parse_git_branch)$DEFAULT"	# git remote url and branch
-PS1="$PS1 ]\n"
-PS1="$PS1\$ "
+function prompt_path {
+    printf "${PWD/#$HOME/~}"
+}
 
+function prompt_git {
+    ref=$(git symbolic-ref HEAD --short 2> /dev/null)
+    shortref=$(git rev-parse --short HEAD 2> /dev/null)
+
+    if [ -n "${ref}" ]; then
+        if [ -z "${git_dirty}" ]; then
+            printf "${git_url} ${SYM_BRANCH} ${ref}"
+        else
+            printf "${git_url} ${SYM_BRANCH} ${ref}${SYM_DIRTY}"
+        fi
+    else
+        if [ -z "${git_dirty}" ]; then
+            printf "${git_url} ${SYM_DETACHED} ${shortref}"
+        else
+            printf "${git_url} ${SYM_DETACHED} ${shortref}${SYM_DIRTY}"
+        fi
+    fi
+}
+
+function prompt {
+    RETVAL=$?
+
+    IS_SSH=0
+    if [ -n "${SSH_CLIENT}" ] || [ -n "${SSH_TTY}" ]; then IS_SSH=1; fi
+
+    git_url=$(git config --get remote.origin.url 2> /dev/null)
+    git_dirty=$(git status --porcelain --ignore-submodules 2> /dev/null)
+
+    # build prompt
+    start_segment ${BG_CLOCK} ${FG_CLOCK}
+    printf "`prompt_clock`"
+    printf "`prompt_status`"
+    start_segment ${BG_USERHOST} ${FG_USERHOST}
+    printf "`prompt_user`"
+    printf "`prompt_host`"
+    start_segment ${BG_PATH} ${FG_PATH}
+    printf "`prompt_path`"
+        if [ -n "${git_url}" ] && [ -z "${git_dirty}" ]; then
+            start_segment ${BG_GIT_CLEAN} ${FG_GIT}
+            printf "`prompt_git`"
+        elif [ -n "${git_url}" ]; then
+            start_segment ${BG_GIT_DIRTY} ${FG_GIT}
+            printf "`prompt_git`"
+        fi
+    end_segment
+    printf "\n» "
+}
+
+PS1="\`prompt\`"

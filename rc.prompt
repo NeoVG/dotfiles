@@ -95,6 +95,7 @@ function prompt {
     git_dirty=$(git status --porcelain --ignore-submodules 2> /dev/null)
 
     # build prompt
+    echo ""
     start_segment ${BG_CLOCK} ${FG_CLOCK}
     printf "`prompt_clock`"
     printf "`prompt_status`"

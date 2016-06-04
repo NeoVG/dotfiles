@@ -71,16 +71,16 @@ function prompt_git {
     shortref=$(git rev-parse --short HEAD 2> /dev/null)
 
     if [ -n "${ref}" ]; then
-        if [ -z "${git_dirty}" ]; then
-            printf "${git_url} ${SYM_BRANCH} ${ref}"
+        if [ -z "${GIT_DIRTY}" ]; then
+            printf "${GIT_URL} ${SYM_BRANCH} ${ref}"
         else
-            printf "${git_url} ${SYM_BRANCH} ${ref}${SYM_DIRTY}"
+            printf "${GIT_URL} ${SYM_BRANCH} ${ref}${SYM_DIRTY}"
         fi
     else
-        if [ -z "${git_dirty}" ]; then
-            printf "${git_url} ${SYM_DETACHED} ${shortref}"
+        if [ -z "${GIT_DIRTY}" ]; then
+            printf "${GIT_URL} ${SYM_DETACHED} ${shortref}"
         else
-            printf "${git_url} ${SYM_DETACHED} ${shortref}${SYM_DIRTY}"
+            printf "${GIT_URL} ${SYM_DETACHED} ${shortref}${SYM_DIRTY}"
         fi
     fi
 }
@@ -91,8 +91,8 @@ function prompt {
     IS_SSH=0
     if [ -n "${SSH_CLIENT}" ] || [ -n "${SSH_TTY}" ]; then IS_SSH=1; fi
 
-    git_url=$(git config --get remote.origin.url 2> /dev/null)
-    git_dirty=$(git status --porcelain --ignore-submodules 2> /dev/null)
+    GIT_URL=$(git config --get remote.origin.url 2> /dev/null)
+    GIT_DIRTY=$(git status --porcelain --ignore-submodules 2> /dev/null)
 
     # build prompt
     echo ""
@@ -104,10 +104,10 @@ function prompt {
     printf "`prompt_host`"
     start_segment ${BG_PATH} ${FG_PATH}
     printf "`prompt_path`"
-        if [ -n "${git_url}" ] && [ -z "${git_dirty}" ]; then
+        if [ -n "${GIT_URL}" ] && [ -z "${GIT_DIRTY}" ]; then
             start_segment ${BG_GIT_CLEAN} ${FG_GIT}
             printf "`prompt_git`"
-        elif [ -n "${git_url}" ]; then
+        elif [ -n "${GIT_URL}" ]; then
             start_segment ${BG_GIT_DIRTY} ${FG_GIT}
             printf "`prompt_git`"
         fi

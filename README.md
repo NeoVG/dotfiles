@@ -4,6 +4,8 @@ Personal unix dotfiles
 
 Bash prompt inspired by [Agnoster](https://gist.github.com/agnoster/3712874) theme for [Oh My Zsh](https://github.com/robbyrussell/oh-my-zsh).
 
+![screenshot](screenshot.png)
+
 ## Usage
 
 ```shell

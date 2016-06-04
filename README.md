@@ -10,7 +10,7 @@ Bash prompt inspired by [Agnoster](https://gist.github.com/agnoster/3712874) the
 
 ```shell
 git clone git@github.com:NeoVG/dotfiles.git
-source source ~/dotfiles/bashrc
+source ~/dotfiles/bashrc
 ```
 
 ## License

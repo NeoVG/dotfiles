@@ -1,5 +1,4 @@
 source ~/dotfiles/helper/prompt-colors.sh
-source ~/dotfiles/helper/prompt-git.sh
 
 BG_CLOCK="40;80;120"
 FG_CLOCK="120;160;200"

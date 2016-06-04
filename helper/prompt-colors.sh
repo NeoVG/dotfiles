@@ -1,12 +1,10 @@
-# usage:
+# segment usage:
 #
 # start_segment
-# start_segment new_foreground
 # start_segment new_background
-
+# start_segment new_background new_foreground
 
 SEPARATOR=""
-
 
 CURRENT_FG=""
 CURRENT_BG=""

@@ -1,4 +1,8 @@
-source ~/dotfiles/helper/prompt-colors.sh
+# Personal dotfiles
+#
+# Copyright (C) 2016 NeoVg <neo@gothnet.eu>
+# Distributed under the GNU General Public License, version 3.0.
+# For full terms see the file LICENSE.md
 
 BG_CLOCK="40;80;120"
 FG_CLOCK="120;160;200"
@@ -25,6 +29,7 @@ SYM_BRANCH=""
 SYM_DETACHED="➦"
 SYM_DIRTY="±"
 
+source ~/dotfiles/helper/prompt-colors.sh
 
 function prompt_clock {
     printf " $(date +"%H:%M")"

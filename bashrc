@@ -1,3 +1,9 @@
+# Personal dotfiles
+#
+# Copyright (C) 2016 NeoVg <neo@gothnet.eu>
+# Distributed under the GNU General Public License, version 3.0.
+# For full terms see the file LICENSE.md
+
 source ~/dotfiles/rc.dotfilelinks
 source ~/dotfiles/rc.aliases
 source ~/dotfiles/rc.prompt

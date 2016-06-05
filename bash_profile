@@ -4,7 +4,7 @@
 # Distributed under the GNU General Public License, version 3.0.
 # For full terms see the file LICENSE.md
 
-IS_NOLOGINSHELL=1
+IS_LOGINSHELL=1
 
 if [ -f ~/.bashrc ]; then
 	source ~/.bashrc

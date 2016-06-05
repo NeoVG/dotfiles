@@ -4,7 +4,7 @@
 # Distributed under the GNU General Public License, version 3.0.
 # For full terms see the file LICENSE.md
 
-if [ "$PS1" ] && [ -z "${IS_NOLOGINSHELL}" ]; then
+if [ "$PS1" ]; then
     if hash bsdinfo 2>/dev/null; then
         bsdinfo
     elif hash archey 2>/dev/null; then

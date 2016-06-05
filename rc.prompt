@@ -93,7 +93,8 @@ function prompt {
     RETVAL=$?
 
     IS_SSH=0
-    if [ -n "${SSH_CLIENT}" ] || [ -n "${SSH_TTY}" ]; then IS_SSH=1; fi
+    #if [ -n "${SSH_CLIENT}" ] || [ -n "${SSH_TTY}" ]; then IS_SSH=1; fi
+    if [[ $(who am i) =~ \(.+\)$ ]]; then IS_SSH=1; fi
 
     GIT_URL=$(git config --get remote.origin.url 2> /dev/null)
     GIT_DIRTY=$(git status --porcelain --ignore-submodules 2> /dev/null)

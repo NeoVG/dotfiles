@@ -20,3 +20,7 @@ elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
     alias ls='ls --color'
 fi
 
+if [ "$(uname)" == "Darwin" ]; then
+    alias ports='sudo lsof -i -P | grep -i "listen"'
+fi
+

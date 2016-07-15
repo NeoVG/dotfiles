@@ -16,3 +16,10 @@ if hash brew 2>/dev/null; then
 	export PATH="/usr/local/sbin:$PATH"
 fi
 
+# set EDITOR to vim
+if [ -e /usr/bin/vim ]; then
+	export EDITOR=/usr/bin/vim
+elif [ -e /usr/local/bin/vim ]; then
+	export EDITOR=/usr/local/bin/vim
+fi
+

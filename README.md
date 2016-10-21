@@ -8,6 +8,15 @@ Bash prompt inspired by [Agnoster](https://gist.github.com/agnoster/3712874) the
 
 ## Usage
 
+Read only:
+
+```shell
+git clone https://github.com/NeoVG/dotfiles.git
+source ~/dotfiles/bashrc
+```
+
+Read/Write:
+
 ```shell
 git clone git@github.com:NeoVG/dotfiles.git
 source ~/dotfiles/bashrc

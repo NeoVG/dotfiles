@@ -12,6 +12,7 @@ FG_ALERT="255;92;92"
 BG_USERHOST="60;100;140"
 FG_USERHOST="196;196;196"
 FG_ROOT="255;128;128"
+FG_WWW="128;255;128"
 FG_AT="128;128;128"
 FG_HOST="196;196;196"
 
@@ -48,6 +49,11 @@ function prompt_user {
     if [ $EUID == 0 ]; then
         local oldfg=${CURRENT_FG}
         set_fg ${FG_ROOT}
+        printf "$(whoami)"
+        set_fg ${oldfg}
+    elif [ "$(whoami)" == "www" ]; then
+        local oldfg=${CURRENT_FG}
+        set_fg ${FG_WWW}
         printf "$(whoami)"
         set_fg ${oldfg}
     else

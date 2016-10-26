@@ -4,12 +4,14 @@
 # Distributed under the GNU General Public License, version 3.0.
 # For full terms see the file LICENSE.md
 
-source ~/dotfiles/rc.dotfilelinks
-source ~/dotfiles/rc.aliases
-source ~/dotfiles/rc.prompt
-source ~/dotfiles/rc.complete
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/dotfiles"
 
-source ~/dotfiles/rc.sysinfo
+source ${DIR}/rc.dotfilelinks
+source ${DIR}/rc.aliases
+source ${DIR}/rc.prompt
+source ${DIR}/rc.complete
+
+source ${DIR}/rc.sysinfo
 
 # set path for homebrew
 if hash brew 2>/dev/null; then

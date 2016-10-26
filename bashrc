@@ -25,3 +25,7 @@ elif [ -e /usr/local/bin/vim ]; then
 	export EDITOR=/usr/local/bin/vim
 fi
 
+# load local rc if present
+if [ -e ${DIR}/rc.local ]; then
+	source ${DIR}/rc.local
+fi

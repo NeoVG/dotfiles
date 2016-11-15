@@ -30,7 +30,7 @@ SYM_BRANCH=""
 SYM_DETACHED="➦"
 SYM_DIRTY="±"
 
-source ~/dotfiles/helper/prompt-colors.sh
+source ${DIR}/helper/prompt-colors.sh
 
 function prompt_clock {
     printf " $(date +"%H:%M")"

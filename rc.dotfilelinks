@@ -4,15 +4,17 @@
 # Distributed under the GNU General Public License, version 3.0.
 # For full terms see the file LICENSE.md
 
-if [ ! -h ~/.bashrc ]; then
-	ln -s ~/dotfiles/bashrc ~/.bashrc
+if [ ! -h ${DIR}/../.bashrc ]; then
+	echo "Linking ${DIR}/bashrc to ${DIR}/../.bashrc"
+	ln -s ${DIR}/bashrc ${DIR}/../.bashrc
 fi
 
-if [ ! -h ~/.bash_profile ]; then
-	ln -s ~/dotfiles/bash_profile ~/.bash_profile
+if [ ! -h ${DIR}/../.bash_profile ]; then
+	echo "Linking ${DIR}/bash_profile to ${DIR}/../.bash_profile"
+	ln -s ${DIR}/bash_profile ${DIR}/../.bash_profile
 fi
 
-if [ ! -h ~/.vimrc ]; then
-	ln -s ~/dotfiles/vimrc ~/.vimrc
+if [ ! -h ${DIR}/../.vimrc ]; then
+	echo "Linking ${DIR}/vimrc to ${DIR}/../.vimrc"
+	ln -s ${DIR}/vimrc ${DIR}/../.vimrc
 fi
-

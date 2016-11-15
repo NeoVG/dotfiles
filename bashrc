@@ -5,7 +5,12 @@
 # For full terms see the file LICENSE.md
 
 # set dotfiles dir
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/dotfiles"
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+echo "${DIR}" | grep -q dotfiles$
+if [ $? -ne 0 ]; then
+		DIR="${DIR}/dotfiles"
+		cd ${DIR}
+fi
 
 # silently update dotfiles
 git -C ${DIR} pull -q & disown

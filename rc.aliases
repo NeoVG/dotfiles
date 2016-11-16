@@ -24,3 +24,6 @@ if [ "$(uname)" == "Darwin" ]; then
     alias ports='sudo lsof -i -P | grep -i "listen"'
 fi
 
+if [ -f "${DIR}/../.vimrc" ]; then
+    alias vim="vim --cmd 'let &rtp = substitute(&rtp, \"\.vim\", \"${DIR}/..\", \"g\")'"
+fi

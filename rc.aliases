@@ -25,5 +25,5 @@ if [ "$(uname)" == "Darwin" ]; then
 fi
 
 if [ -f "${DIR}/../.vimrc" ]; then
-    alias vim="vim --cmd 'let &rtp = substitute(&rtp, \"\.vim\", \"${DIR}/..\", \"g\")'"
+    alias vim="vim -u ${DIR}/../.vimrc"
 fi

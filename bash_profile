@@ -6,7 +6,7 @@
 
 IS_LOGINSHELL=1
 
-if [ -f ~/.bashrc ]; then
-	source ~/.bashrc
+if [ -f ./.bashrc ]; then
+	source ./.bashrc
 fi
 

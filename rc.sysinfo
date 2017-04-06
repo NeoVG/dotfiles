@@ -7,6 +7,9 @@
 if [ "${PS1}" ] && [ "${IS_LOGINSHELL}" ]; then
     if hash bsdinfo 2>/dev/null; then
         bsdinfo
+    elif hash neofetch 2>/dev/null; then
+        echo ""
+        neofetch
     elif hash archey 2>/dev/null; then
         archey
     elif hash screenfetch 2>/dev/null; then

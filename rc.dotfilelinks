@@ -18,3 +18,9 @@ if [ ! -h ${DIR}/../.vimrc ]; then
 	echo "Linking ${DIR}/vimrc to ${DIR}/../.vimrc"
 	ln -s ${DIR}/vimrc ${DIR}/../.vimrc
 fi
+
+# add include to .gitconfig
+if [ -f ${DIR}/../.gitconfig ] && ! grep -q "path = ${DIR}/gitconfig" ${DIR}/../.gitconfig; then
+	echo "[include]" >> ${DIR}/../.gitconfig
+	echo "	path = ${DIR}/gitconfig" >> ${DIR}/../.gitconfig
+fi

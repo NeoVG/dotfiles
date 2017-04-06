@@ -33,8 +33,6 @@ elif [ -e /usr/local/bin/vim ]; then
 	export EDITOR=/usr/local/bin/vim
 fi
 
-if [ -f $(brew --prefix)/etc/bash_completion ]; then source $(brew --prefix)/etc/bash_completion; fi
-
 # load local rc if present
 if [ -e ${DIR}/rc.local ]; then
 	source ${DIR}/rc.local

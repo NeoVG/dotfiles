@@ -1,0 +1,42 @@
+# Personal dotfiles
+#
+# Copyright (C) 2016 NeoVg <neo@gothnet.eu>
+# Distributed under the GNU General Public License, version 3.0.
+# For full terms see the file LICENSE.md
+
+SOURCES="https://github.com/NeoVG/dotfiles.git"
+
+# only run in interactive shell
+if [ ! -z "$PS1" ]; then
+    DIR="$( find ~ -type d -name dotfiles )"
+
+    # if dotfiles not present, clone from GitHub
+    if [ "${DIR}" == "" ]; then
+        echo ""
+        echo "Load dotfiles from GitHub"
+        echo ""
+
+        BIN_GIT="$( which git )"
+        if [ "${BIN_GIT}" == "" ]; then
+            echo "No Git client found!"
+            echo ""
+            echo "Try:"
+            echo "  sudo pkg install git"
+            echo "  sudo apt install git"
+            echo "  brew install git"
+            echo ""
+        else
+            echo "Git found"
+            echo "Remote user: ${REMOTE_USER}"
+            echo ""
+
+            mkdir -p ~/${REMOTE_USER}
+            ${BIN_GIT} -C ~/${REMOTE_USER} clone ${SOURCES}
+            source ~/${REMOTE_USER}/dotfiles/bashrc
+        fi
+    else
+        if [ -e "${DIR}/bashrc" ]; then
+            source "${DIR}"/bashrc
+        fi
+    fi
+fi

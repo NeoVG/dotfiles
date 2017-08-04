@@ -21,7 +21,7 @@ fi
 
 if [ ! -h ${DIR}/../.sshrc ]; then
 	echo "Linking ${DIR}/sshrc to ~/.sshrc"
-	ln -s ${DIR}/sshrc ~./.sshrc
+	ln -s ${DIR}/sshrc ~/.sshrc
 fi
 
 # add include to .gitconfig

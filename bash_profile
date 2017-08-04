@@ -6,7 +6,13 @@
 
 IS_LOGINSHELL=1
 
-if [ -f ./.bashrc ]; then
-	source ./.bashrc
+# set dotfiles dir
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+echo "${DIR}" | grep -q dotfiles$
+if [ $? -ne 0 ]; then
+                DIR="${DIR}/dotfiles"
 fi
 
+if [ -f ${DIR}/../.bashrc ]; then
+        source ${DIR}/../.bashrc
+fi

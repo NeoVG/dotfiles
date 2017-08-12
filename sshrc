@@ -35,8 +35,8 @@ if [ ! -z "$PS1" ]; then
             source ~/${REMOTE_USER}/dotfiles/bashrc
         fi
     else
-        if [ -e "${DIR}/bash_profile" ]; then
-            source "${DIR}"/bash_profile
+        if [ -e "${DIR}/../.bash_profile" ]; then
+            source ${DIR}/../.bash_profile
         fi
     fi
 fi

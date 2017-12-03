@@ -31,5 +31,5 @@ fi
 BIN_SSHRC="$( which sshrc )"
 if [ "${BIN_SSHRC}" != "" ]; then
     function ssl { ${BIN_SSHRC} ${1} "export REMOTE_USER=$(whoami)"; }
+    export -f ssl
 fi
-export -f ssl

@@ -30,7 +30,5 @@ fi
 
 BIN_SSHRC="$( which sshrc )"
 if [ "${BIN_SSHRC}" != "" ]; then
-#    function ssl { ${BIN_SSHRC} ${1} "export REMOTE_USER=$(whoami)"; }
-#    export -f ssl
-    alias ssl=${BIN_SSHRC}
+    alias ssl="LC_REMOTE_USER=$(whoami) sshrc -o SendEnv=LC_REMOTE_USER ${1}"
 fi

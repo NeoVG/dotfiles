@@ -8,10 +8,14 @@ SOURCES="https://github.com/NeoVG/dotfiles.git"
 
 # only run in interactive shell
 if [ ! -z "$PS1" ]; then
-    DIR="$( find ~ -type d -name dotfiles )"
+    # Move old dotfiles dir if necessary
+    if [ -d ~/${LC_REMOTE_USER}/dotfiles ]; then
+        echo "Move ~/${LC_REMOTE_USER} to ~/.${LC_REMOTE_USER}"
+        mv ~/${LC_REMOTE_USER} ~/.${LC_REMOTE_USER}
+    fi
 
-    # if dotfiles not present, clone from GitHub
-    if [ "${DIR}" == "" ]; then
+    # Check if dotfiles exist and download them if necessary
+    if [ ! -d ~/.dotfiles ] && [ ! -d ~/.${LC_REMOTE_USER}/dotfiles ]; then
         echo ""
         echo "Load dotfiles from GitHub"
         echo ""
@@ -27,16 +31,19 @@ if [ ! -z "$PS1" ]; then
             echo ""
         else
             echo "Git found"
-            echo "Remote user: ${REMOTE_USER}"
+            echo "Remote user: ${LC_REMOTE_USER}"
             echo ""
 
-            mkdir -p ~/${REMOTE_USER}
-            ${BIN_GIT} -C ~/${REMOTE_USER} clone ${SOURCES}
-            source ~/${REMOTE_USER}/dotfiles/bashrc
+            mkdir -p ~/.${LC_REMOTE_USER}
+            ${BIN_GIT} -C ~/.${LC_REMOTE_USER} clone ${SOURCES}
         fi
+    fi
+
+    if [ -f ~/.dotfiles/bashrc ]; then
+        source ~/.dotfiles/bashrc
+    elif [ -f ~/.${LC_REMOTE_USER}/dotfiles/bashrc ]; then
+        source ~/.${LC_REMOTE_USER}/dotfiles/bashrc
     else
-        if [ -e "${DIR}/../.bash_profile" ]; then
-            source ${DIR}/../.bash_profile
-        fi
+        echo "Neither ~/.dotfiles/bashrc nor ~/.${LC_REMOTE_USER}/dotfiles/bashrc found"
     fi
 fi

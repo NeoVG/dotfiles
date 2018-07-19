@@ -30,15 +30,15 @@ alias ports='sudo lsof -i -P | grep -i "listen"' # macOS
 Read only:
 
 ```shell
-git clone https://github.com/NeoVG/dotfiles.git
-source ~/dotfiles/bashrc
+git clone https://github.com/NeoVG/dotfiles.git ~/.dotfiles
+source ~/.dotfiles/bashrc
 ```
 
 Read/Write:
 
 ```shell
-git clone git@github.com:NeoVG/dotfiles.git
-source ~/dotfiles/bashrc
+git clone git@github.com:NeoVG/.dotfiles.git
+source ~/.dotfiles/bashrc
 ```
 
 ## License

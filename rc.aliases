@@ -24,8 +24,8 @@ if [ "$(uname)" == "Darwin" ]; then
     alias ports='sudo lsof -i -P | grep -i "listen"'
 fi
 
-if [ -f "${DIR}/../.vimrc" ]; then
-    alias vim="vim -u ${DIR}/../.vimrc"
+if [ -f "${DIR}/vimrc" ]; then
+    alias vim="vim -u ${DIR}/vimrc"
 fi
 
 BIN_SSHRC="$( which sshrc )"

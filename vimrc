@@ -27,9 +27,9 @@ endif
 """"" indentation
 
 " 4 spaces per indent
-"set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
+set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
 " one tab per indent, displayed as 8 spaces
-set noexpandtab tabstop=8 shiftwidth=8
+"set noexpandtab tabstop=8 shiftwidth=8
 " :retab                        " convert tabs/spaces to current setting
 
 "syntax match Tab /\t/           " show tabs as dark grey

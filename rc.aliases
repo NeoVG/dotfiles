@@ -22,6 +22,7 @@ fi
 
 if [ "$(uname)" == "Darwin" ]; then
     alias ports='sudo lsof -i -P | grep -i "listen"'
+    alias brewup='brew update && brew upgrade && brew cleanup && brew doctor'
 fi
 
 if [ -f "${DIR}/vimrc" ]; then

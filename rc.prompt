@@ -62,14 +62,14 @@ function prompt_user {
 }
 
 function prompt_host {
-    if [ $IS_SSH == 1 ]; then
+#    if [ $IS_SSH == 1 ]; then
         local oldfg=${CURRENT_FG}
         set_fg ${FG_AT}
         printf " @ "
         set_fg ${FG_HOST}
         printf "$(hostname)"
         set_fg ${oldfg}
-    fi
+#    fi
 }
 
 function prompt_path {

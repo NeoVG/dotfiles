@@ -18,6 +18,6 @@ if [ -f ${DIR}/../.bashrc ]; then
 fi
 
 if [ -f ${DIR}/../.bash_profile_local ]; then
-        echo "load local bash profile at ${DIR}/../.bash_profile_local"
+        [[ $- == *i* ]] && echo "load local bash profile at ${DIR}/../.bash_profile_local"
         source ${DIR}/../.bash_profile_local
 fi

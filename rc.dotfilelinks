@@ -5,22 +5,22 @@
 # For full terms see the file LICENSE.md
 
 if [ ! -h ${DIR}/../.bashrc ]; then
-	echo "Linking ${DIR}/bashrc to ${DIR}/../.bashrc"
+	[[ $- == *i* ]] && echo "Linking ${DIR}/bashrc to ${DIR}/../.bashrc"
 	ln -s ${DIR}/bashrc ${DIR}/../.bashrc
 fi
 
 if [ ! -h ${DIR}/../.bash_profile ]; then
-	echo "Linking ${DIR}/bash_profile to ${DIR}/../.bash_profile"
+	[[ $- == *i* ]] && echo "Linking ${DIR}/bash_profile to ${DIR}/../.bash_profile"
 	ln -s ${DIR}/bash_profile ${DIR}/../.bash_profile
 fi
 
 if [ ! -h ${DIR}/../.vimrc ]; then
-	echo "Linking ${DIR}/vimrc to ${DIR}/../.vimrc"
+	[[ $- == *i* ]] && echo "Linking ${DIR}/vimrc to ${DIR}/../.vimrc"
 	ln -s ${DIR}/vimrc ${DIR}/../.vimrc
 fi
 
 if [ ! -h ${DIR}/../.sshrc ]; then
-	echo "Linking ${DIR}/sshrc to ${DIR}/../.sshrc"
+	[[ $- == *i* ]] && echo "Linking ${DIR}/sshrc to ${DIR}/../.sshrc"
 	ln -s ${DIR}/sshrc ${DIR}/../.sshrc
 fi
 

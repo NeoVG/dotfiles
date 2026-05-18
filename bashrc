@@ -11,8 +11,11 @@ if [ $? -ne 0 ]; then
 		DIR="${DIR}/dotfiles"
 fi
 
-# silently update dotfiles
-git -C ${DIR} pull -q & disown
+# silently update dotfiles — only in interactive shells, so non-interactive
+# bash -c invocations (e.g. MCP servers launched by Claude Desktop) stay clean
+if [[ $- == *i* ]]; then
+	git -C ${DIR} pull -q >/dev/null 2>&1 & disown
+fi
 
 # execute rc files
 source ${DIR}/rc.dotfilelinks

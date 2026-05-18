@@ -84,13 +84,13 @@ function prompt_git {
         if [ -z "${GIT_DIRTY}" ]; then
             printf "${GIT_URL} ${SYM_BRANCH} ${ref}"
         else
-            printf "${GIT_URL} ${SYM_BRANCH} ${ref}${SYM_DIRTY}"
+            printf "${GIT_URL} ${SYM_BRANCH} ${ref} ${SYM_DIRTY}"
         fi
     else
         if [ -z "${GIT_DIRTY}" ]; then
             printf "${GIT_URL} ${SYM_DETACHED} ${shortref}"
         else
-            printf "${GIT_URL} ${SYM_DETACHED} ${shortref}${SYM_DIRTY}"
+            printf "${GIT_URL} ${SYM_DETACHED} ${shortref} ${SYM_DIRTY}"
         fi
     fi
 }

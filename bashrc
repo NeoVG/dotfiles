@@ -11,21 +11,24 @@ if [ $? -ne 0 ]; then
 		DIR="${DIR}/dotfiles"
 fi
 
-# silently update dotfiles — only in interactive shells, so non-interactive
-# bash -c invocations (e.g. MCP servers launched by Claude Desktop) stay clean
-if [[ $- == *i* ]]; then
+# silently update dotfiles (login shells only)
+if [ "${IS_LOGINSHELL}" ]; then
 	git -C ${DIR} pull -q >/dev/null 2>&1 & disown
 fi
 
 # execute rc files
-source ${DIR}/rc.dotfilelinks
+if [ "${IS_LOGINSHELL}" ]; then
+	source ${DIR}/rc.dotfilelinks
+fi
 source ${DIR}/rc.aliases
 source ${DIR}/rc.prompt
 source ${DIR}/rc.complete
 source ${DIR}/rc.sysinfo
 
-# set PATH for homebrew
-if hash brew 2>/dev/null; then
+# set PATH for homebrew sbin
+if [ -d /opt/homebrew/sbin ]; then
+	export PATH="/opt/homebrew/sbin:$PATH"
+elif [ -d /usr/local/sbin ]; then
 	export PATH="/usr/local/sbin:$PATH"
 fi
 
@@ -40,4 +43,8 @@ fi
 if [ -e ${DIR}/rc.local ]; then
 	source ${DIR}/rc.local
 fi
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/neo/.lmstudio/bin"
+# End of LM Studio CLI section
 

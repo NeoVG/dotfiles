@@ -17,7 +17,7 @@ if [ -f ${DIR}/../.bashrc ]; then
         source ${DIR}/../.bashrc
 fi
 
-if [ -f ${DIR}/../.bash_profile_local ]; then
-        [[ $- == *i* ]] && echo "load local bash profile at ${DIR}/../.bash_profile_local"
-        source ${DIR}/../.bash_profile_local
-fi
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/neo/.lmstudio/bin"
+# End of LM Studio CLI section
+

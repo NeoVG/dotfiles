@@ -7,19 +7,22 @@
 # after sudo
 complete -cf sudo
 
-# git
-source ${DIR}/helper/git-completion.sh
-# Apply git aliases only in interactive shells to avoid .gitconfig.lock
-# contention when many non-interactive children start in parallel.
-if [[ $- == *i* ]]; then
-	git config --global alias.co checkout
-	git config --global alias.br branch
-	git config --global alias.ci commit
-	git config --global alias.st status
+# System/Homebrew bash-completion
+# Supports macOS Homebrew (Intel + Apple Silicon) and Linux (Ubuntu/Debian)
+if [ -z "${BASH_COMPLETION_VERSINFO+x}" ]; then
+	for _bc_path in /opt/homebrew/etc/profile.d/bash_completion.sh \
+	                /usr/local/etc/profile.d/bash_completion.sh \
+	                /usr/share/bash-completion/bash_completion \
+	                /etc/bash_completion; do
+		if [ -f "${_bc_path}" ]; then
+			source "${_bc_path}"
+			break
+		fi
+	done
+	unset _bc_path
 fi
 
-# homebrew
-if [ -f /usr/local/etc/bash_completion.d/brew ]; then
-	source /usr/local/etc/bash_completion.d/brew
+# Fallback: bundled git completion for hosts without a system one
+if ! type __git_complete &>/dev/null; then
+	source ${DIR}/helper/git-completion.sh
 fi
-

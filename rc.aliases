@@ -9,6 +9,7 @@ alias la='ls -lah'
 alias du1='du -xHhd 1 | sort -k2'
 alias df='df -h'
 alias tmux='tmux -2 -CC'
+alias gitpull='git pull'
 
 if [ $EUID != 0 ]; then
 	alias su='sudo su'
